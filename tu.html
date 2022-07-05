@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit" />
+	<meta name="force-rendering" content="webkit" />
+	<meta name="author" content="Icret EasyImage2.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>简单图床 - EasyImage</title>
+	<meta name="keywords" content="简单图床,easyimage,easyimage2.0,无数据库图床,PHP多图长传程序,自适应页面,HTML5,markdown,bbscode,一键复制" />
+	<meta name="description" content="简单图床EasyImage是一款支持多文件上传的无数据库图床,可以完美替代PHP多图上传程序,最新html5自适应页面兼容手机电脑,上传后返回图片直链,markdown图片,论坛贴图bbscode链接,简单方便支持一键复制,支持多域名,api上传" />
+	<link rel="shortcut icon" href="https://tu.199677.xyz/favicon.ico" type="image/x-icon" />
+	<link href="https://tu.199677.xyz/public/static/zui/css/zui.min.css" rel="stylesheet">
+	<link href="https://tu.199677.xyz/public/static/zui/theme/zui-theme-default.css" rel="stylesheet">
+	<script src="https://tu.199677.xyz/public/static/zui/lib/jquery/jquery-3.6.0.min.js"></script>
+	<script src="https://tu.199677.xyz/public/static/zui/js/zui.min.js"></script>
+	<!--[if lt IE 9]>
+    <script src="http://tu.199677.xyz/public/static/zui/lib/ieonly/html5shiv.js"></script>
+    <script src="http://tu.199677.xyz/public/static/zui/lib/ieonly/respond.js"></script>
+    <script src="http://tu.199677.xyz/public/static/zui/lib/ieonly/excanvas.js"></script>
+  <![endif]-->
+	
+</head>
+
+<body class="container">
+	<div class="page-header">
+		<ul class="nav nav-pills">
+			<li><a href="https://tu.199677.xyz"><i class="icon icon-home"></i> 首页</a></li>
+			
+			<li><a href="https://tu.199677.xyz/application/list.php"><i class="icon icon-th"></i> 广场<span class="label label-badge label-primary">0</span></a></li>
+		</ul>
+	</div>
+	<!-- 顶部导航栏END -->
+<div class="col-md-12">
+  <!-- 公告 -->
+  <div class="marquee">
+    <div class="wrap">
+      <div id="marquee2">
+        <a href="https://github.com/icret/EasyImages2.0" target="_black"><i class="icon icon-github"> 如果你喜欢这种图床风格就下载喔 (๑•̀ㅂ•́)و✧</i></a>
+<a href="https://github.com/icret/EasyImages2.0" target="_black"><i class="icon icon-heart"> 简单图床是一款开源图床, 支持多文件上传无数据库</i></a>
+<a><li class="icon icon-bullhorn text-muted"> 单文件≤10M，单次上传≤30张</li></a>      </div>
+    </div>
+  </div>
+  <div id='upShowID' class="uploader col-md-12 clo-xs-12" data-ride="uploader" data-url="/application/upload.php">
+    <div class="uploader-message text-center">
+      <div class="content"></div>
+      <button type="button" class="close">x</button>
+    </div>
+    <div class="uploader-files file-list file-list-lg file-rename-by-click" data-drag-placeholder="选择文件/Ctrl+V粘贴/拖拽至此处" style="min-height: 160px; border-style: dashed;"></div>
+    <div class="uploader-actions">
+      <div class="uploader-status pull-right text-muted"></div>
+      <button type="button" class="btn btn-link uploader-btn-browse"><i class="icon icon-plus"></i> 选择文件</button>
+      <button type="button" class="btn btn-link uploader-btn-start"><i class="icon icon-cloud-upload"></i> 开始上传</button>
+      <button type="button" class="btn btn-link uploader-btn-stop"><i class="icon icon-pause"></i> 暂停上传</button>
+    </div>
+  </div>
+  <div class="col-md-12 clo-xs-12" style="margin-bottom:90px;">
+    <ul class="nav nav-tabs">
+      <li class="active">
+        <a href="#" data-target="#tab2Content1" data-toggle="tab"><i class="icon icon-link"></i> 直链</a>
+      </li>
+      <li >
+        <a href="#" data-target="#tab2Content2" data-toggle="tab"><i class="icon icon-chat"></i> 论坛代码</a>
+      </li>
+      <li >
+        <a href="#" data-target="#tab2Content3" data-toggle="tab"><i class="icon icon-code"></i> MarkDown</a>
+      </li>
+      <li >
+        <a href="#" data-target="#tab2Content4" data-toggle="tab"><i class="icon icon-html5"></i> HTML</a>
+      </li>
+      <li >
+        <a href="#" data-target="#tab2Content5" data-toggle="tab"><i class="icon icon-trash"></i> 删除</a>
+      </li>
+    </ul>
+    <div class="tab-content" style="text-align:right;">
+      <div class="tab-pane fade active in" id="tab2Content1">
+        <textarea class="form-control" rows="5" id="links" readonly></textarea>
+        <button class="btn btn-primary" style="margin-top:10px;" onclick="location.reload()"><i class="icon icon-undo"></i> 刷新</button>
+        <button id="btnLinks" class="btn btn-primary copyBtn1" data-loading-text="已经复制链接..." style="margin-top:10px;"><i class="icon icon-copy"></i> 复制</button>
+      </div>
+      <div class="tab-pane fade " id="tab2Content2">
+        <textarea class="form-control" rows="5" id="bbscode" readonly></textarea>
+        <button class="btn btn-primary" style="margin-top:10px;" onclick="location.reload()"><i class="icon icon-undo"></i> 刷新</button>
+        <button id="btnBbscode" class="btn btn-primary copyBtn2" data-loading-text="已经复制链接..." style="margin-top:10px;"><i class="icon icon-copy"></i> 复制</button>
+      </div>
+      <div class="tab-pane fade " id="tab2Content3">
+        <textarea class="form-control" rows="5" id="markdown" readonly></textarea>
+        <button class="btn btn-primary" style="margin-top:10px;" onclick="location.reload()"><i class="icon icon-undo"></i> 刷新</button>
+        <button id="btnMarkDown" class="btn btn-primary copyBtn3" data-loading-text="已经复制链接..." style="margin-top:10px;"><i class="icon icon-copy"></i> 复制</button>
+      </div>
+      <div class="tab-pane fade " id="tab2Content4">
+        <textarea class="form-control" rows="5" id="html" readonly></textarea>
+        <button class="btn btn-primary" style="margin-top:10px;" onclick="location.reload()"><i class="icon icon-undo"></i> 刷新</button>
+        <button id="btnHtml" class="btn btn-primary copyBtn4" data-loading-text="已经复制链接..." style="margin-top:10px;"><i class="icon icon-copy"></i> 复制</button>
+      </div>
+      <div class="tab-pane fade " id="tab2Content5">
+        <textarea class="form-control" rows="5" id="del" readonly></textarea>
+        <button class="btn btn-primary" style="margin-top:10px;" onclick="location.reload()"><i class="icon icon-undo"></i> 刷新</button>
+        <button id="btndel" class="btn btn-primary copyBtn5" data-loading-text="已经复制链接..." style="margin-top:10px;"><i class="icon icon-copy"></i> 复制</button>
+      </div>
+    </div>
+  </div>
+</div>
+<link href="https://tu.199677.xyz/public/static/marquee/marquee.css" rel="stylesheet">
+<link href="https://tu.199677.xyz/public/static/zui/lib/uploader/zui.uploader.min.css" rel="stylesheet">
+<script src="https://tu.199677.xyz/public/static/zui/lib/uploader/zui.uploader.min.js"></script>
+<script src="https://tu.199677.xyz/public/static/marquee/marquee.min.js"></script>
+<script src="https://tu.199677.xyz/public/static/EasyImage.js"></script>
+<script>
+  // 公告
+  (function() {
+    new Marquee({
+      // 要滚动的元素
+      elem: document.getElementById("marquee2"),
+      // 每次滚动的步长(px)，默认0
+      step: 30,
+      // 滚动效果执行时间(ms)，默认400
+      stepInterval: 400,
+      // 每次滚动间隔时间(ms)，默认3000
+      interval: 3000,
+      // 滚动方向，up、down、left、right，默认为"left" 当前只支持上下
+      dir: 'up',
+      // 是否自动滚动，默认为true
+      autoPlay: true,
+      // 是否在鼠标滑过低级元素时暂停滚动，默认为true
+      hoverPause: true
+    });
+  })();
+
+  // 上传控制
+  $('#upShowID').uploader({
+    // 自动上传
+    autoUpload: false,
+    // 文件上传提交地址
+    url: './application/upload.php',
+    // 最大支持的上传文件
+    max_file_size: 10485760,
+    // 分片上传 0为不分片 分片容易使图片上传失败
+    chunk_size: 0,
+    // 点击文件列表上传文件
+    browseByClickList: true,
+    // flash 上传组件地址
+    flash_swf_url: 'http://tu.199677.xyz/public/static/zui/lib/uploader/Moxie.swf',
+    // silverlight 上传组件地址
+    flash_swf_url: 'http://tu.199677.xyz/public/static/zui/lib/uploader/Moxie.xap',
+    // 预览图尺寸
+    previewImageSize: {
+      'width': 80,
+      'height': 80
+    },
+    // 上传格式过滤
+    filters: { // 只允许上传图片或图标（.ico）
+      mime_types: [{
+          title: '图片',
+          extensions: 'gif,jpeg,png,tif,bmp,tif,svg,webp,jpg,tga,svg,ico'
+        },
+        {
+          title: '图标',
+          extensions: 'ico'
+        }
+      ],
+      prevent_duplicates: true
+    },
+    // 限制文件上传数目
+    limitFilesCount: 30,
+    // 重置上传失败的文件
+    autoResetFails: true,
+    file_data_name:'file',
+    responseHandler: function(responseObject, file) {
+      var obj = JSON.parse(responseObject.response); //由JSON字符串转换为JSON对象
+      console.log(obj); // 输出log
+      console.log(file); // 输出log
+      if (obj.result === 'success') {
+        document.getElementById("links").innerHTML += obj.url + "\r\n";
+        document.getElementById("bbscode").innerHTML += "[img]" + obj.url + "[/img]\r\n";
+        document.getElementById("markdown").innerHTML += "![" + obj.srcName + "](" + obj.url + ")\r\n";
+        document.getElementById("html").innerHTML += '<img src="' + obj.url + '" alt="' + obj.srcName + '" />\r\n';
+        document.getElementById("del").innerHTML += obj.del + "\r\n";
+      } else {
+        return '上传失败,错误信息:' + obj.message;
+      }
+    }
+  });
+</script>
+<!-- 二维码 -->
+<div class="modal fade" id="qr">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">x</span>
+          <span class="sr-only">关闭</span></button>
+        <p class="modal-title icon icon-mobile" style="text-align: center">扫描二维码使用手机上传</p>
+      </div>
+      <div class="modal-body">
+        <p id="qrcode"></p>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="container text-muted small navbar-fixed-bottom" style="text-align: center;background-color:rgba(255,255,255,0.7);">
+  <hr>
+  <a href="/admin/terms.php" target="_blank">请勿上传违反中国政策的图片</a>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c790ac2bdc2f385757ecd0183206108d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>  <p>
+    © 2018-2022    <a href="https://png.cm/" target="_blank"> EasyImage</a>
+    <a href="https://github.com/icret/EasyImages2.0" target="_blank" rel="nofollow">2.5.9</a> By
+    <a href="https://blog.png.cm" target="_blank">Icret</a>
+    <a href="/admin/terms.php" target="_blank"> DMCA</a>
+    <!-- 二维码按钮 -->
+    <a data-toggle="modal" href="#qr" title="使用手机扫描二维码访问"><i class="icon icon-qrcode hidden-xs inline-block"></i></a>
+    <a href="https://tu.199677.xyz/admin/index.php" title="账号登录"><i class="icon icon-user"></i></a>  </p>
+</footer>
+<link href="https://tu.199677.xyz/public/static/nprogress/nprogress.min.css" rel="stylesheet">
+<script src="https://tu.199677.xyz/public/static/nprogress/nprogress.min.js"></script>
+<script src="https://tu.199677.xyz/public/static/qrcode/qrcode.min.js"></script>
+<script>
+  // 导航状态
+  $('.nav-pills').find('a').each(function() {
+    if (this.href == document.location.href) {
+      $(this).parent().addClass('active'); // this.className = 'active';
+    }
+  });
+
+  // NProgress
+  NProgress.start();
+  NProgress.done();
+
+  // js 获取当前网址二维码
+  var qrcode = new QRCode(document.getElementById("qrcode"), {
+    text: window.location.href,
+    width: 265,
+    height: 256,
+    colorDark: "#353535",
+    colorLight: "#F1F1F1",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+
+  // 二维码对话框属性
+  $('#qr').modal({
+    moveable: "inside",
+    backdrop: false,
+    show: false,
+  })
+
+  
+  
+  // console
+  console.log("%cEasyImage2.0", "background: rgba(252,234,187,1);background: -moz-linear-gradient(left, rgba(252,234,187,1) 0%, rgba(175,250,77,1) 12%, rgba(0,247,49,1) 28%, rgba(0,210,247,1) 39%,rgba(0,189,247,1) 51%, rgba(133,108,217,1) 64%, rgba(177,0,247,1) 78%, rgba(247,0,189,1) 87%, rgba(245,22,52,1) 100%);background: -webkit-gradient(left top, right top, color-stop(0%, rgba(252,234,187,1)), color-stop(12%, rgba(175,250,77,1)), color-stop(28%, rgba(0,247,49,1)), color-stop(39%, rgba(0,210,247,1)), color-stop(51%, rgba(0,189,247,1)), color-stop(64%, rgba(133,108,217,1)), color-stop(78%, rgba(177,0,247,1)), color-stop(87%, rgba(247,0,189,1)), color-stop(100%, rgba(245,22,52,1)));background: -webkit-linear-gradient(left, rgba(252,234,187,1) 0%, rgba(175,250,77,1) 12%, rgba(0,247,49,1) 28%, rgba(0,210,247,1) 39%, rgba(0,189,247,1) 51%, rgba(133,108,217,1) 64%, rgba(177,0,247,1) 78%, rgba(247,0,189,1) 87%, rgba(245,22,52,1) 100%);background: -o-linear-gradient(left, rgba(252,234,187,1) 0%, rgba(175,250,77,1) 12%, rgba(0,247,49,1) 28%, rgba(0,210,247,1) 39%, rgba(0,189,247,1) 51%, rgba(133,108,217,1) 64%, rgba(177,0,247,1) 78%, rgba(247,0,189,1) 87%, rgba(245,22,52,1) 100%);background: -ms-linear-gradient(left, rgba(252,234,187,1) 0%, rgba(175,250,77,1) 12%, rgba(0,247,49,1) 28%, rgba(0,210,247,1) 39%, rgba(0,189,247,1) 51%, rgba(133,108,217,1) 64%, rgba(177,0,247,1) 78%, rgba(247,0,189,1) 87%, rgba(245,22,52,1) 100%);background: linear-gradient(to right, rgba(252,234,187,1) 0%, rgba(175,250,77,1) 12%, rgba(0,247,49,1) 28%, rgba(0,210,247,1) 39%, rgba(0,189,247,1) 51%, rgba(133,108,217,1) 64%, rgba(177,0,247,1) 78%, rgba(247,0,189,1) 87%, rgba(245,22,52,1) 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', endColorstr='#f51634', GradientType=1 );font-size:2.34em;font-weight:bold")
+  console.log('%c图床演示网站: https://png.cm \n请为本人博客 https://blog.png.cm/ 加上链接, 谢谢尊重!\n作为开发者你可以对相应的后台功能进行扩展(增删改相应代码), 但请保留代码中相关来源信息(例如: 本人博客, 邮箱等);\n本程序由 Icret 独自开发并完全开源, 碰到收费发布的请不要轻易付款; 本人仅为程序开源创作, 如非法网站使用与本人无关, 请勿用于非法用途.%c ', 'color: #eaad1a; padding:5px 0; border:1px solid #448ef6; font-size:12px;', '');
+</script>
+</body>
+
+</html>
